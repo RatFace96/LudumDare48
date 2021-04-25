@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
 
     void CalculateSpeed()
     {
+        if (EatPoints > 0) ;
         Speed = EatPoints;
         Debug.Log(Speed);
     }
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour
         }
 
         mouseWorldPos.z = transform.position.z;
-        transform.position = Vector3.Lerp(transform.position, mouseWorldPos, Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, mouseWorldPos, Speed * Time.deltaTime / 3);
 
         var neededRotation = -Vector2.SignedAngle(mouseWorldPos - transform.position, Vector2.up);
         transform.rotation = Quaternion.AngleAxis(neededRotation + 90, Vector3.forward);        
