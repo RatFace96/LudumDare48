@@ -1,23 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float RotationSpeed;
-    public float Speed;
+    public event Action OnDead;
 
-    public int eatPoints = 10;
-    public int EatPoints 
-    {
-        get
-        {
-            return eatPoints;
-        } 
-        private set 
-        {
-            eatPoints = value;
-            CalculateSpeed();
-        }
-    } 
+    public UIController UIController;
+
+    public float RotationSpeed;
+
+
+    public float MaxEatPoints = 20;
+    public float EatPoints = 10;    
 
     public float DistanceFollowPrecision = 0.1f;
 
@@ -34,25 +28,16 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(timerLostEat > 0)
-        {
-            timerLostEat -= Time.deltaTime;
-            return;
-        }
-        timerLostEat = defaulttimerLostEat;
-        EatPoints--;
+        if (!UIController.IsStart) return;
         
+        EatPoints -= Time.deltaTime / timerLostEat;
     }
 
-    void CalculateSpeed()
-    {
-        if (EatPoints > 0) ;
-        Speed = EatPoints;
-        Debug.Log(Speed);
-    }
-
+    float speed;
     private void FixedUpdate()
-    {             
+    {
+        if (!UIController.IsStart) return;
+
         var mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
 
         direction = _camera.ScreenToWorldPoint(mouseWorldPos) - transform.position;
@@ -62,8 +47,21 @@ public class Player : MonoBehaviour
             return;
         }
 
+        if(EatPoints > 10)
+        {
+            speed = EatPoints * Time.deltaTime / 5;
+        }
+        else if(EatPoints > 5)
+        {
+            speed = EatPoints * Time.deltaTime / 3;
+        }
+        else
+        {
+            speed = EatPoints * Time.deltaTime / 2f;
+        }
+
         mouseWorldPos.z = transform.position.z;
-        transform.position = Vector3.Lerp(transform.position, mouseWorldPos, Speed * Time.deltaTime / 3);
+        transform.position = Vector3.Lerp(transform.position, mouseWorldPos, speed);
 
         var neededRotation = -Vector2.SignedAngle(mouseWorldPos - transform.position, Vector2.up);
         transform.rotation = Quaternion.AngleAxis(neededRotation + 90, Vector3.forward);        
@@ -78,5 +76,11 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    private void OnDestroy()
+    {
+        OnDead?.Invoke();
+    }
 }
+
 
