@@ -19,18 +19,27 @@ public class Enemy : MonoBehaviour
         MyPoint.OnPlayerEnter += StartChase;
         MyPoint.OnPlayerExit += StopChase;
         target = FindObjectOfType<Player>().transform;
+        myAnim = GetComponent<Animator>();
     }
 
     private void StartChase(Transform target)
-    {
+    { 
         //TODO: Trigger alert animation and when animation is over set "catch = true"
-        myAnim.SetBool("IsChasing", true);
+        myAnim.SetBool("isAlerted", true);
         this.target = target;
+        //SetChase(true);
     }
 
-    private void SetChase(bool state)
+    private void SetChaseTrue()
     {
-        chase = state;
+        chase = true;
+        myAnim.SetBool("isChase", true);
+    }
+
+    private void SetChaseFalse()
+    {
+        chase = false;
+        myAnim.SetBool("isChase", false);
     }
 
     private void Update()
@@ -58,9 +67,9 @@ public class Enemy : MonoBehaviour
 
     private void StopChase()
     {
-        //TODO: Set Idle Animation 
-        myAnim.SetBool("IsChasing", false);        
-        chase = false;
+        //TODO: Set Idle Animation     
+        SetChaseFalse();
+        myAnim.SetBool("isAlerted", false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
