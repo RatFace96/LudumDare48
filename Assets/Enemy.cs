@@ -12,19 +12,25 @@ public class Enemy : MonoBehaviour
     Vector2 direction;
 
     bool chase;
+    Animator myAnim;
 
     private void Awake()
     {
-        MyPoint.OnPlayerEnter += StartChaseTarget;
+        MyPoint.OnPlayerEnter += StartChase;
         MyPoint.OnPlayerExit += StopChase;
         target = FindObjectOfType<Player>().transform;
     }
 
-    private void StartChaseTarget(Transform target)
+    private void StartChase(Transform target)
     {
-        Debug.Log("chase");
+        //TODO: Trigger alert animation and when animation is over set "catch = true"
+        myAnim.SetBool("IsChasing", true);
         this.target = target;
-        chase = true;
+    }
+
+    private void SetChase(bool state)
+    {
+        chase = state;
     }
 
     private void Update()
@@ -38,9 +44,11 @@ public class Enemy : MonoBehaviour
                 return;
             }
 
+            //looks on player
             var neededRotation = -Vector2.SignedAngle(target.position - transform.position, Vector2.up);
             transform.rotation = Quaternion.AngleAxis(neededRotation + 90, Vector3.forward);
 
+            //when chase = true, then enemy start a chase player.
             if (chase)
             {
                 transform.position = Vector3.Lerp(transform.position, target.position, Speed * Time.deltaTime / 3);
@@ -50,18 +58,21 @@ public class Enemy : MonoBehaviour
 
     private void StopChase()
     {
-        Debug.Log("stop chase");
+        //TODO: Set Idle Animation 
+        myAnim.SetBool("IsChasing", false);        
         chase = false;
     }
 
-    private void OnCollisionEnter2D(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(collision.gameObject);
+        //Destroy all what we collide
+        //TODO: At first play "death" animation of Player. It can be trans to Player.cs if it need
+        Destroy(collision.gameObject);        
     }
 
     private void OnDestroy()
     {
-        MyPoint.OnPlayerEnter -= StartChaseTarget;
+        MyPoint.OnPlayerEnter -= StartChase;
         MyPoint.OnPlayerExit -= StopChase;
     }
 }

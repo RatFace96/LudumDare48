@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
         _camera = Camera.main;
     }
 
-    float defaulttimerLostEat = 3f;
     float timerLostEat = 3f;
 
     private void Update()
@@ -36,6 +35,7 @@ public class Player : MonoBehaviour
     float speed;
     private void FixedUpdate()
     {
+        // IsStart = true, when we pressed start button in StartMenu
         if (!UIController.IsStart) return;
 
         var mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
             return;
         }
 
+        //correct player speed.
         if(EatPoints > 10)
         {
             speed = EatPoints * Time.deltaTime / 5;
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var col = collision.GetComponent<ICollectable>();
+        //TODO: Play "ate cheese" animation 
         if (col != null) 
         {
             EatPoints++;            
