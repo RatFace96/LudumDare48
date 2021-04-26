@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 8493577583886786762}
   - component: {fileID: 8493577583886786761}
   - component: {fileID: 8493577583886786760}
+  - component: {fileID: 2729148931114011824}
   - component: {fileID: 8493577583886786767}
   m_Layer: 0
   m_Name: Cheese
@@ -191,6 +192,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
+--- !u!58 &2729148931114011824
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8493577583886786766}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.5
 --- !u!114 &8493577583886786767
 MonoBehaviour:
   m_ObjectHideFlags: 0
