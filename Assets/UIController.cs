@@ -11,11 +11,15 @@ public class UIController : MonoBehaviour
     public GameObject EndMenu;
     public GameObject StartMenu;
 
+    public Text score;
+
     public Player Player;
-    public Image Cheesebar;
+    public Slider Cheesebar;
 
     public Button StartBtn;
     public Button RestartBtn;
+
+    public AudioSource GameAudio;
 
     private void Start()
     {
@@ -29,12 +33,16 @@ public class UIController : MonoBehaviour
     void HideStartMenu()
     {
         StartMenu.SetActive(false);
+        Player.ateCheeses = 0;
+        GameAudio.Play();
         IsStart = true;
     }
 
     void ShowEnd()
     {
+        GameAudio.Stop();
         EndMenu.SetActive(true);
+        score.text += Player.ateCheeses.ToString();
         IsStart = false;
     }
 
@@ -46,7 +54,7 @@ public class UIController : MonoBehaviour
     private void Update()
     {
         if (Player) 
-            Cheesebar.fillAmount = Player.EatPoints / Player.MaxEatPoints;
+            Cheesebar.value = Player.EatPoints / Player.MaxEatPoints;
     }
 
     private void OnDestroy()

@@ -28,7 +28,7 @@ public class SearchArrow : MonoBehaviour
         if (item)
         {
             var neededRotation = -Vector2.SignedAngle(item.position - transform.position, Vector2.up);
-            transform.rotation = Quaternion.AngleAxis(neededRotation + 90, Vector3.forward);
+            transform.rotation = Quaternion.AngleAxis(neededRotation, Vector3.forward);
         }
     }
 

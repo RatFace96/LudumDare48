@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float RotationSpeed;
 
 
+    public float MaxSpeedMouse;
     public float MaxEatPoints = 20;
     public float EatPoints = 10;    
 
@@ -17,6 +18,10 @@ public class Player : MonoBehaviour
 
     Vector2 direction;
     Camera _camera;
+
+    public int ateCheeses = 0;
+
+    public AudioSource EatCheeseSource;
 
     private void Awake()
     {
@@ -33,12 +38,13 @@ public class Player : MonoBehaviour
     }
 
     float speed;
+    Vector3 mouseWorldPos;
     private void FixedUpdate()
     {
         // IsStart = true, when we pressed start button in StartMenu
         if (!UIController.IsStart) return;
 
-        var mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
 
         direction = _camera.ScreenToWorldPoint(mouseWorldPos) - transform.position;
 
@@ -47,22 +53,11 @@ public class Player : MonoBehaviour
             return;
         }
 
-        //correct player speed.
-        if(EatPoints > 10)
-        {
-            speed = EatPoints * Time.deltaTime / 5;
-        }
-        else if(EatPoints > 5)
-        {
-            speed = EatPoints * Time.deltaTime / 3;
-        }
-        else
-        {
-            speed = EatPoints * Time.deltaTime / 2f;
-        }
-
+        speed = EatPoints * Time.deltaTime;
+        
         mouseWorldPos.z = transform.position.z;
-        transform.position = Vector3.Lerp(transform.position, mouseWorldPos, speed);
+
+        transform.position = Vector2.MoveTowards(transform.position, mouseWorldPos, speed);
 
         var neededRotation = -Vector2.SignedAngle(mouseWorldPos - transform.position, Vector2.up);
         transform.rotation = Quaternion.AngleAxis(neededRotation + 90, Vector3.forward);        
@@ -70,11 +65,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var col = collision.GetComponent<ICollectable>();
+        var col = collision.GetComponent<Cheese>();
         //TODO: Play "ate cheese" animation 
         if (col != null) 
         {
-            EatPoints++;            
+            EatCheeseSource.Play();
+            EatPoints++;
+            ateCheeses++;
             Destroy(collision.gameObject);
         }
     }
