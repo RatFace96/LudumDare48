@@ -10731,7 +10731,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10923,7 +10923,7 @@ MonoBehaviour:
   UIController: {fileID: 1024730565}
   RotationSpeed: 10
   MaxEatPoints: 20
-  EatPoints: 10
+  EatPoints: 7
   DistanceFollowPrecision: 0.1
   ateCheeses: 0
   EatCheeseSource: {fileID: 530952416}
