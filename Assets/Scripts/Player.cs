@@ -53,7 +53,14 @@ public class Player : MonoBehaviour
             return;
         }
 
-        speed = EatPoints * Time.deltaTime;
+        if(EatPoints < MaxEatPoints)
+        {
+            speed = EatPoints * Time.deltaTime;
+        }
+        if(speed < 0 || EatPoints < 0)
+        {
+            speed = Time.deltaTime;
+        }
         
         mouseWorldPos.z = transform.position.z;
 
