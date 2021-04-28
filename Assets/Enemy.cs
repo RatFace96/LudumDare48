@@ -87,7 +87,13 @@ public class Enemy : MonoBehaviour
         var col = collision.gameObject.GetComponent<Enemy>();
         if (col == null)
         {
-            Destroy(collision.gameObject);        
+            var player = collision.gameObject.GetComponent<Player>();
+            if (player == null)
+                Destroy(collision.gameObject);
+            else
+            {
+                Destroy(collision.gameObject, UIController.EndGameDelay);
+            }
         }
     }
 

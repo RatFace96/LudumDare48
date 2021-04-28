@@ -10796,7 +10796,7 @@ Transform:
   - {fileID: 1659586843}
   - {fileID: 800089407}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &530952410
 MonoBehaviour:
@@ -10812,7 +10812,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIController: {fileID: 1024730565}
   RotationSpeed: 10
-  MaxSpeedMouse: 0
   MaxEatPoints: 20
   EatPoints: 10
   DistanceFollowPrecision: 0.1
@@ -16551,8 +16550,8 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
-      atime2: 0
+      atime1: 52238
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -16560,7 +16559,7 @@ LineRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 50
     alignment: 0
@@ -21429,9 +21428,6 @@ MonoBehaviour:
   StartBtn: {fileID: 460588602}
   RestartBtn: {fileID: 1850379834}
   GameAudio: {fileID: 414958745}
-  StartGameDelay: 0
-  EndGameDelay: 0
-  RestartGameDelay: 0
 --- !u!114 &1024730566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30588,7 +30584,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1565324930
 PrefabInstance:

@@ -22,9 +22,9 @@ public class UIController : MonoBehaviour
 
     public AudioSource GameAudio;
 
-    public float StartGameDelay;
-    public float EndGameDelay;
-    public float RestartGameDelay;
+    public static float StartGameDelay;
+    public static float EndGameDelay = 5;
+    public static float RestartGameDelay;
 
     private void Start()
     {
@@ -59,7 +59,7 @@ public class UIController : MonoBehaviour
 
     Coroutine startDelay;
 
-    void StartDelay(float delay, Action onFinish)
+    public void StartDelay(float delay, Action onFinish)
     {
         if (startDelay != null) StopCoroutine(startDelay);
         startDelay = StartCoroutine(Delay(delay, onFinish));
