@@ -24,6 +24,7 @@ public class UIController : MonoBehaviour
 
     public float StartGameDelay;
     public float EndGameDelay;
+    public float RestartGameDelay;
 
     private void Start()
     {
@@ -79,7 +80,10 @@ public class UIController : MonoBehaviour
 
     void RestartGame()
     {
-        SceneManager.LoadScene("Game");
+        StartDelay(RestartGameDelay, () =>
+        {
+            SceneManager.LoadScene("Game");
+        });
     }
 
     private void Update()
