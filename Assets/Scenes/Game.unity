@@ -10792,9 +10792,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
+  - {fileID: 795573605}
   - {fileID: 1659586843}
   - {fileID: 800089407}
-  - {fileID: 795573605}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16442,7 +16442,7 @@ Transform:
   m_Children:
   - {fileID: 864110036}
   m_Father: {fileID: 530952409}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &795573606
 MonoBehaviour:
@@ -16605,7 +16605,7 @@ Transform:
   m_LocalScale: {x: 0.40374342, y: 0.40374342, z: 0.40374342}
   m_Children: []
   m_Father: {fileID: 530952409}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!95 &800089408
 Animator:
@@ -21464,7 +21464,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 2224, y: 1668}
+  m_ReferenceResolution: {x: 650, y: 800}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -32729,7 +32729,7 @@ Transform:
   m_Children:
   - {fileID: 1604721018}
   m_Father: {fileID: 530952409}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1659586844
 MonoBehaviour:
