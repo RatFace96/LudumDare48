@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,9 @@ public class UIController : MonoBehaviour
 
     public AudioSource GameAudio;
 
+    public float StartGameDelay;
+    public float EndGameDelay;
+
     private void Start()
     {
         StartMenu.SetActive(true);
@@ -32,18 +36,45 @@ public class UIController : MonoBehaviour
 
     void HideStartMenu()
     {
-        StartMenu.SetActive(false);
-        Player.ateCheeses = 0;
-        GameAudio.Play();
-        IsStart = true;
+        StartDelay(StartGameDelay, () =>
+        {
+            StartMenu.SetActive(false);
+            Player.ateCheeses = 0;
+            GameAudio.Play();
+            IsStart = true;
+        });
     }
 
     void ShowEnd()
     {
-        GameAudio.Stop();
-        EndMenu.SetActive(true);
-        score.text += Player.ateCheeses.ToString();
-        IsStart = false;
+        StartDelay(EndGameDelay, () =>
+        {
+            GameAudio.Stop();
+            EndMenu.SetActive(true);
+            score.text += Player.ateCheeses.ToString();
+            IsStart = false;
+        });
+    }
+
+    Coroutine startDelay;
+
+    void StartDelay(float delay, Action onFinish)
+    {
+        if (startDelay != null) StopCoroutine(startDelay);
+        startDelay = StartCoroutine(Delay(delay, onFinish));
+    }
+
+    IEnumerator Delay(float delay, Action onFinish)
+    {
+        yield return null;
+        while (delay > 0)
+        {
+            delay -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        onFinish?.Invoke();
+        startDelay = null;
     }
 
     void RestartGame()
