@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     public float MaxSpeedMouse;
     public float MaxEatPoints = 20;
-    public float EatPoints = 10;    
+    public float EatPoints = 5;    
 
     public float DistanceFollowPrecision = 0.1f;
 
@@ -53,13 +53,9 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if(EatPoints < MaxEatPoints)
+        if(EatPoints > 6 || EatPoints < MaxEatPoints)
         {
             speed = EatPoints * Time.deltaTime;
-        }
-        if(speed < 0 || EatPoints < 0)
-        {
-            speed = Time.deltaTime;
         }
         
         mouseWorldPos.z = transform.position.z;
