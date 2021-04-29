@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -25,11 +23,9 @@ public class Enemy : MonoBehaviour
     bool isAlert = false;
     private void StartChase(Transform target)
     { 
-        //TODO: Trigger alert animation and when animation is over set "catch = true"
         if(!isAlert)
             myAnim.SetBool("isAlerted", true);
         this.target = target;
-        //SetChase(true);
     }
 
     private void SetChaseTrue()
@@ -52,6 +48,8 @@ public class Enemy : MonoBehaviour
         {
             direction = target.position - transform.position;
             
+            if (direction.sqrMagnitude > 100) return;
+            
             if (direction.sqrMagnitude < DistanceFollowPrecision)
             {
                 return;
@@ -65,9 +63,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(target)
-        //when chase = true, then enemy start a chase player.
-        if (chase)
+        if (chase && target)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, Speed * Time.deltaTime);
         }
@@ -75,15 +71,12 @@ public class Enemy : MonoBehaviour
 
     private void StopChase()
     {
-        //TODO: Set Idle Animation     
         SetChaseFalse();
         myAnim.SetBool("isAlerted", false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Destroy all what we collide
-        //TODO: At first play "death" animation of Player. It can be trans to Player.cs if it need
         var col = collision.gameObject.GetComponent<Enemy>();
         if (col == null)
         {
