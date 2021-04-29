@@ -8,11 +8,14 @@ public class CheeseCounterView : MonoBehaviour
     public Player Player;
 
     public Text Text;
+
+    int count = 0;
     void Update()
     {
         if (Player)
         {
-            Text.text = "x" + Player.ateCheeses;
+            count = Player.ateCheeses;
         }
+        Text.text = "x" + count;
     }
 }
