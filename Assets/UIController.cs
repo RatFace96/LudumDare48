@@ -12,8 +12,6 @@ public class UIController : MonoBehaviour
     public GameObject EndMenu;
     public GameObject StartMenu;
 
-    public Text score;
-
     public Player Player;
     public Slider Cheesebar;
 
@@ -22,9 +20,9 @@ public class UIController : MonoBehaviour
 
     public AudioSource GameAudio;
 
-    public static float StartGameDelay;
-    public static float EndGameDelay = 5;
-    public static float RestartGameDelay;
+    public static float StartGameDelay = 3f;
+    public static float EndGameDelay = 2;
+    public static float RestartGameDelay=1;
 
     private void Start()
     {
@@ -48,13 +46,9 @@ public class UIController : MonoBehaviour
 
     void ShowEnd()
     {
-        StartDelay(EndGameDelay, () =>
-        {
-            GameAudio.Stop();
-            EndMenu.SetActive(true);
-            score.text += Player.ateCheeses.ToString();
-            IsStart = false;
-        });
+        GameAudio.Stop();
+        EndMenu.SetActive(true);
+        IsStart = false;
     }
 
     Coroutine startDelay;

@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if(EatPoints > 6 || EatPoints < MaxEatPoints)
+        if(EatPoints > 6 && EatPoints < MaxEatPoints)
         {
             speed = EatPoints * Time.deltaTime;
         }
