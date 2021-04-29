@@ -18,8 +18,6 @@ public class Player : MonoBehaviour
     Camera _camera;
     Animator myAnim;
 
-    public int ateCheeses = 0;
-
     public AudioSource EatCheeseSource;
 
     private void Awake()
@@ -76,7 +74,7 @@ public class Player : MonoBehaviour
             EatCheeseSource.Play();
             
             EatPoints++;
-            ateCheeses++;
+            UIController.AteCheeses++;
             Destroy(collision.gameObject);
             return;
         }

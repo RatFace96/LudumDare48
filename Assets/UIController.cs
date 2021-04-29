@@ -23,6 +23,7 @@ public class UIController : MonoBehaviour
     public static float StartGameDelay = 3f;
     public static float EndGameDelay = 2;
     public static float RestartGameDelay=1;
+    public int AteCheeses = 0;
 
     private void Start()
     {
@@ -38,7 +39,7 @@ public class UIController : MonoBehaviour
         StartDelay(StartGameDelay, () =>
         {
             StartMenu.SetActive(false);
-            Player.ateCheeses = 0;
+            AteCheeses = 0;
             GameAudio.Play();
             IsStart = true;
         });
